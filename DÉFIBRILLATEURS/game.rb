@@ -32,7 +32,6 @@ defibs.each do |defi|
   if d < min_dist
     min_dist = d
     answer = d_name
-    p "min_dist after= #{min_dist}"
   end
 end
 # Retourner réponse
