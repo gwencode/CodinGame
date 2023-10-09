@@ -1,20 +1,23 @@
-const message = "C";
+/**
+ * The while loop represents the game.
+ * Each iteration represents a turn of the game
+ * where you are given inputs (the heights of the mountains)
+ * and where you have to print an output (the index of the mountain to fire on)
+ * The inputs you are given are automatically updated according to your last actions.
+ **/
 
-const chars = message.split('')
-let bits = ""
-let encod_message = ""
+// game loop
+while (true) {
+  const heights = [];
+  for (let i = 0; i < 8; i++) {
+      const mountainH = parseInt(readline()); // represents the height of one mountain.
+      heights.push(mountainH);
+  }
+  const initialValue = 0;
+  const max = heights.reduce((accumulator, currentValue) => Math.max(accumulator, currentValue), initialValue);
+  const index = heights.findIndex((element) => element === max);
+  // Write an action using console.log()
+  // To debug: console.error('Debug messages...');
 
-
-chars.forEach((char) => {
-  bits += char.charCodeAt(0).toString(2).padStart(7, '0')
-})
-
-const groupes = bits.match(/(0+|1+)/g);
-
-groupes.forEach((groupe) => {
-  let first_bloc = groupe[0] === "1" ? "0" : "00"
-  let second_bloc = "0".repeat(groupe.length)
-  encod_message += `${first_bloc} ${second_bloc} `
-})
-
-console.log(encod_message.trim())
+  console.log(index);     // The index of the mountain to fire on.
+}
