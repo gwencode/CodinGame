@@ -11,8 +11,6 @@ def test_abb(s)
     return "\\"
   when "sQ"
     return "'"
-  # when "nl"
-  #   return "\n"
   else
     return s
   end
@@ -21,7 +19,6 @@ end
 # puts test_abb("sp")
 # puts test_abb("bS")
 # puts test_abb("sQ")
-# puts test_abb("nl")
 # puts test_abb("o")
 
 t.each do |chunk|
@@ -35,12 +32,11 @@ t.each do |chunk|
     if chunk[1].to_i.positive? || chunk[1] == "0"
       digit = chunk[0..1].to_i
       chunk.slice!(0..1)
-      answer += test_abb(chunk) * digit
     else
       digit = chunk[0].to_i
       chunk.slice!(0)
-      answer += test_abb(chunk) * digit
     end
+    answer += test_abb(chunk) * digit
   end
 end
 puts answer
