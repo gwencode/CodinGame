@@ -30,7 +30,7 @@ def round(player1, player2)
   when 'S'
     winner = %w[L P].include?(sign2) ? player2 : player1
   end
-  winner == player1 ? winner[:wins] << player2[:num] :  winner[:wins] << player1[:num]
+  winner == player1 ? winner[:wins] << player2[:num] : winner[:wins] << player1[:num]
   winner
 end
 
