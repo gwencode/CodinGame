@@ -33,7 +33,7 @@ type Outputs = [string, Gate, string, string]
 
 let outputSignals: outputSignal[] = []
 for (let i = 0; i < m; i++) {
-    var outputs: Outputs = readline().split(' ');
+    var outputs: Outputs = readline().split(' ') as Outputs;
     const outputName: string = outputs[0];
     const type: Gate = outputs[1];
     const inputName1: string = outputs[2];
@@ -82,6 +82,6 @@ outputSignals.forEach((outputSignal) => {
   let input1 = inputSignals.find((input) => input.inputName === inputName1);
   let input2 = inputSignals.find((input) => input.inputName === inputName2);
   // 2e string avec la comparaison entre les signaux 1 et 2
-  let outSignal = signalsCompare(input1!.inputSignal, input2!.inputSignal, outputSignal.type);
+  let outSignal = signalsCompare(input1.inputSignal, input2.inputSignal, outputSignal.type);
   console.log(outputName + " " + outSignal);
 })
