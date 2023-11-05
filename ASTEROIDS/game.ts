@@ -76,3 +76,7 @@ function buildThirdPictureArray(thirdPicture: Picture): string[] {
   });
   return thirdPictureArray
 }
+
+let thirdPictureArray = buildThirdPictureArray(thirdPicture)
+
+thirdPictureArray.forEach((row) => console.log(row))
