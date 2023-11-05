@@ -56,6 +56,14 @@ function buildThirdPicture(firstPicture: Picture, secondPicture: Picture): Pictu
 let thirdPicture: Picture = buildThirdPicture(firstPicture, secondPicture)
 // console.log(thirdPicture);
 
+function replaceCharacter(string: string, index: number, replacement: string): string {
+  return (
+    string.slice(0, index) +
+    replacement +
+    string.slice(index, string.length - 1 )
+  );
+}
+
 function buildThirdPictureArray(thirdPicture: Picture): string[] {
   let thirdPictureArray: string[] = Array(H).fill(".".repeat(H));
   Object.entries(thirdPicture).forEach(entry => {
@@ -64,7 +72,7 @@ function buildThirdPictureArray(thirdPicture: Picture): string[] {
     // if !( char === null && (char != "." && char.charCodeAt(0) < astero.charCodeAt(0))) {
 
     // }
-    thirdPictureArray[coord.y][coord.x] = astero
+    thirdPictureArray[coord.y] = replaceCharacter(thirdPictureArray[coord.y], coord.x, astero)
   });
   return thirdPictureArray
 }
