@@ -16,23 +16,48 @@
 # first_picture_array = ["A.....", "......", "B.....", "......", "......", "......"]
 # second_picture_array = [".A....", "B.....", "......", "......", "......", "......"]
 
-# Example 9
-w = 10
-H = 10
-t1 = 100
-t2 = 200
-t3 = 300
+# # Example 9
+# w = 10
+# H = 10
+# t1 = 100
+# t2 = 200
+# t3 = 300
+# first_picture_array = [
+#   "A.........", "B.........", "C.........",
+#   "D.........", "E.........", ".........F",
+#   ".........G", ".........H", ".........I",
+#   ".........J"
+# ]
+# second_picture_array = [
+#   ".A........", "..B.......", "...C......",
+#   "....D.....", ".....E....", "........F.",
+#   ".......G..", "......H...", ".....I....",
+#   "....J....."
+# ]
+
+# Example 10
+w = 20
+H = 20
+t1 = 25
+t2 = 75
+t3 = 100
 first_picture_array = [
-  "A.........", "B.........", "C.........",
-  "D.........", "E.........", ".........F",
-  ".........G", ".........H", ".........I",
-  ".........J"
+  ".................O..", ".....N...........U..", ".............L.R....",
+  "....................", "..........Z..V.H....", "................X...",
+  ".............P......", ".............A......", ".Q.............T....",
+  "..................F.", "....................", "......K............W",
+  "...............Y....", "..............S.....", "...........JE......D",
+  "...M................", "......B..G...C....I.", "....................",
+  "....................", "...................."
 ]
 second_picture_array = [
-  ".A........", "..B.......", "...C......",
-  "....D.....", ".....E....", "........F.",
-  ".......G..", "......H...", ".....I....",
-  "....J....."
+  "G...................", "...............W....", "...................C",
+  "...E................", "..............K.....", "...........T........",
+  "............A.......", ".....P...FLI......N.", "....................",
+  "........D...........", "......S..Y.........M", ".........B....Z.....",
+  "....................", "....V.............J.", ".........O..........",
+  "..X...........U.....", "....................", "....................",
+  "..Q................R", ".......H............"
 ]
 
 TIME1 = t2 - t1
@@ -44,16 +69,16 @@ def astero_coordinates(picture_array)
     row = element.chars # ["A", ".", ".", ".", "."]
     row.each_with_index do |astero, x_index|
       if astero != "."
-        picture[astero] = {x: x_index, y: y_index}
+        picture[astero] = { x: x_index, y: y_index }
       end
     end
   end
   return picture
 end
 
-p first_picture = astero_coordinates(first_picture_array)
+first_picture = astero_coordinates(first_picture_array)
 # {"A"=>{:x=>0, :y=>0}, "B"=>{:x=>0, :y=>2}}
-p second_picture = astero_coordinates(second_picture_array)
+second_picture = astero_coordinates(second_picture_array)
 # {"A"=>{:x=>1, :y=>0}, "B"=>{:x=>0, :y=>1}}
 
 def calculate_new_dist(first_picture, second_picture)
@@ -65,8 +90,8 @@ def calculate_new_dist(first_picture, second_picture)
     speed_y = dist_y.fdiv(TIME1) # 1
     new_dist_x = TIME2 * speed_x
     new_dist_y = TIME2 * speed_y
-    new_coord_x = (second_picture[astero][:x] + new_dist_x).to_i
-    new_coord_y = (second_picture[astero][:y] + new_dist_y).to_i
+    new_coord_x = (second_picture[astero][:x] + new_dist_x)
+    new_coord_y = (second_picture[astero][:y] + new_dist_y)
     if (0..H - 1).include?(new_coord_x) && (0..H - 1).include?(new_coord_y)
       third_picture[astero] = {x: new_coord_x, y: new_coord_y}
     end
@@ -74,7 +99,7 @@ def calculate_new_dist(first_picture, second_picture)
   return third_picture
 end
 
-p third_picture = calculate_new_dist(first_picture, second_picture)
+third_picture = calculate_new_dist(first_picture, second_picture)
 
 def build_third_picture_array(third_picture)
   third_picture_array = ([""] * H).map do
