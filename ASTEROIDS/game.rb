@@ -68,9 +68,7 @@ def astero_coordinates(picture_array)
   picture_array.each_with_index do |element, y_index|
     row = element.chars # ["A", ".", ".", ".", "."]
     row.each_with_index do |astero, x_index|
-      if astero != "."
-        picture[astero] = { x: x_index, y: y_index }
-      end
+      picture[astero] = { x: x_index, y: y_index } if astero != "."
     end
   end
   return picture
@@ -81,7 +79,7 @@ first_picture = astero_coordinates(first_picture_array)
 second_picture = astero_coordinates(second_picture_array)
 # {"A"=>{:x=>1, :y=>0}, "B"=>{:x=>0, :y=>1}}
 
-def calculate_new_dist(first_picture, second_picture)
+def build_third_picture(first_picture, second_picture)
   third_picture = {}
   first_picture.each do |astero, coord|
     dist_x = second_picture[astero][:x] - coord[:x] # 0
@@ -99,7 +97,7 @@ def calculate_new_dist(first_picture, second_picture)
   return third_picture
 end
 
-third_picture = calculate_new_dist(first_picture, second_picture)
+third_picture = build_third_picture(first_picture, second_picture)
 
 def build_third_picture_array(third_picture)
   third_picture_array = ([""] * H).map do
