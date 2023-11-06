@@ -50,12 +50,12 @@ function navigate(maze: string[], moves: Move[], row: number, col: number, index
 function check(maze: string[], moves: Move[], index: string): [string[], Move[]] {
   let initialMoves: Move[] = moves.slice();
   moves.forEach((move) => {
-      if (maze[move.row][move.col + 1] === "." || maze[move.row][move.col + 1] === undefined) {
+      if (maze[move.row][move.col + 1] === "." || move.col + 1 >= w) {
           let nav = navigate(maze, moves, move.row, move.col + 1, index)
           maze = nav[0]
           moves = nav[1]
       }
-      if (maze[move.row][move.col - 1] === "." || maze[move.row][move.col - 1] === undefined) {
+      if (maze[move.row][move.col - 1] === "." ||  move.col - 1 < 0) {
           let nav = navigate(maze, moves, move.row, move.col - 1, index)
           maze = nav[0]
           moves = nav[1]
