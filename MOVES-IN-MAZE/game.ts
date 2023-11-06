@@ -30,25 +30,45 @@ function replaceCharacter(string: string, index: number, replacement: string): s
   );
 }
 
+function navigate(maze: string[], moves: Move[], row: number, col: number, index: string): [string[], Move[]] {
+  if (row >= h) {
+      row = 0
+  } else if (row < 0) {
+      row = h - 1
+  } else if (col >= w) {
+      col = 0
+  } else if (col < 0) {
+      col = w - 1
+  }
+  if (maze[row][col] === ".") {
+      maze[row] = replaceCharacter(maze[row], col, index)
+      moves.push({row: row, col: col})
+  }
+  return [maze, moves]
+}
+
 function check(maze: string[], moves: Move[], index: string): [string[], Move[]] {
-  // Checker position à droite, si c'est un "."" ajouter 1 (ou A, B...)
   let initialMoves: Move[] = moves.slice();
   moves.forEach((move) => {
-      if (maze[move.row][move.col + 1] === ".") {
-      maze[move.row] = replaceCharacter(maze[move.row], move.col + 1, index)
-      moves.push({row: move.row, col: move.col + 1})
+      if (maze[move.row][move.col + 1] === "." || maze[move.row][move.col + 1] === undefined) {
+          let nav = navigate(maze, moves, move.row, move.col + 1, index)
+          maze = nav[0]
+          moves = nav[1]
       }
-      if (maze[move.row][move.col - 1] === ".") {
-      maze[move.row] = replaceCharacter(maze[move.row], move.col - 1, index)
-      moves.push({row: move.row, col: move.col - 1})
+      if (maze[move.row][move.col - 1] === "." || maze[move.row][move.col - 1] === undefined) {
+          let nav = navigate(maze, moves, move.row, move.col - 1, index)
+          maze = nav[0]
+          moves = nav[1]
       }
-      if (maze[move.row + 1][move.col] === ".") {
-      maze[move.row + 1] = replaceCharacter(maze[move.row + 1], move.col, index)
-      moves.push({row: move.row + 1, col: move.col})
+      if (maze[move.row + 1] === undefined || maze[move.row + 1][move.col] === ".") {
+          let nav = navigate(maze, moves, move.row + 1, move.col, index)
+          maze = nav[0]
+          moves = nav[1]
       }
-      if (maze[move.row - 1][move.col] === ".") {
-      maze[move.row - 1] = replaceCharacter(maze[move.row - 1], move.col, index)
-      moves.push({row: move.row + 1, col: move.col - 1})
+      if (maze[move.row - 1] === undefined || maze[move.row - 1][move.col] === ".") {
+          let nav = navigate(maze, moves, move.row - 1, move.col, index)
+          maze = nav[0]
+          moves = nav[1]
       }
   });
   initialMoves.forEach((initialMove) => {
@@ -65,7 +85,6 @@ maze[start.row] = replaceCharacter(maze[start.row], start.col, '0')
 let moves: Move[] = [start]
 
 for (let i = 1; i < 36; i++) {
-  console.error('i: ', i)
   let checks: [string[], Move[]] = [[], []]
   if (i >= 10 && i <= 35) {
       checks = check(maze, moves, String.fromCharCode(65 + i - 10))
@@ -74,9 +93,5 @@ for (let i = 1; i < 36; i++) {
   }
   maze = checks[0]
   moves = checks[1]
-  if (8 <= i && i <= 10) {
-      console.error('maze', maze)
-      console.error('moves', moves)
-  }
 }
 maze.forEach((row) => console.log(row))
