@@ -71,13 +71,13 @@ function buildThirdPicture(firstPicture: Picture, secondPicture: Picture): Pictu
 let thirdPicture: Picture = buildThirdPicture(firstPicture, secondPicture)
 // console.log(thirdPicture);
 
-function replaceCharacter(string: string, index: number, replacement: string): string {
-    return (
-      string.slice(0, index) +
-      replacement +
-      string.slice(index + 1, string.length)
-    );
-  }
+// function replaceCharacter(string: string, index: number, replacement: string): string {
+//   return (
+//     string.slice(0, index) +
+//     replacement +
+//     string.slice(index + 1, string.length)
+//   );
+// }
 
   function buildThirdPictureArray(thirdPicture: Picture): string[] {
     let thirdPictureArray: string[] = Array(H).fill(".".repeat(H));
